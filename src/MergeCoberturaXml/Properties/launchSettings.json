@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MergeCoberturaXml": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MergeCoberturaXml", "src\MergeCoberturaXml\MergeCoberturaXml.csproj", "{F5579E41-DFBF-459B-A58A-B6FD2F9F37CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F0C43278-2EF1-43A3-B6F5-1F6E706C3398}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5681382E-8C01-4E5A-9F88-E7CE429A0493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeCoberturaXml.Test", "tests\MergeCoberturaXml.Test\MergeCoberturaXml.Test.csproj", "{D930BF1B-18CB-4568-913A-00FB2A081850}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5579E41-DFBF-459B-A58A-B6FD2F9F37CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5579E41-DFBF-459B-A58A-B6FD2F9F37CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5579E41-DFBF-459B-A58A-B6FD2F9F37CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5579E41-DFBF-459B-A58A-B6FD2F9F37CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D930BF1B-18CB-4568-913A-00FB2A081850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D930BF1B-18CB-4568-913A-00FB2A081850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D930BF1B-18CB-4568-913A-00FB2A081850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D930BF1B-18CB-4568-913A-00FB2A081850}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F5579E41-DFBF-459B-A58A-B6FD2F9F37CD} = {F0C43278-2EF1-43A3-B6F5-1F6E706C3398}
+		{D930BF1B-18CB-4568-913A-00FB2A081850} = {5681382E-8C01-4E5A-9F88-E7CE429A0493}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4FB722E-C381-459A-BD10-AFE93D1C9D33}
+	EndGlobalSection
+EndGlobal
