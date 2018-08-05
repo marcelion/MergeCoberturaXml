@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.362" branch-rate="0.247" version="2.0" timestamp="1533113686" lines-covered="5" lines-valid="10" branches-covered="0" branches-valid="1">
+  <sources>
+    <source>D:\dummy-project\</source>
+  </sources>
+  <packages>
+    <package name="DummyProject.Server" line-rate="0.5" branch-rate="0" complexity="0">
+      <classes>
+        <class name="DummyProject.Server.Controllers.DummyController" filename="src\DummyProject.Server\Controllers\DummyController.cs" line-rate="0.5" branch-rate="0" complexity="0">
+          <methods>
+            <method name="DummyMethod1" signature="()" line-rate="1" branch-rate="0">
+              <lines>
+                <line number="1"  hits="12" branch="False" />
+                <line number="2"  hits="12" branch="False" />
+                <line number="3"  hits="12" branch="False" />
+                <line number="4"  hits="12" branch="False" />
+                <line number="5"  hits="12" branch="False" />
+              </lines>
+            </method>
+            <method name="DummyMethod2" signature="(System.Uri,System.Net.Http.DelegatingHandler[])" line-rate="0" branch-rate="0">
+              <lines>
+                <line number="6"  hits="0" branch="False" />
+                <line number="7"  hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="8"  hits="0" branch="False" />
+                <line number="9"  hits="0" branch="False" />
+                <line number="10" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="1"  hits="12" branch="False" />
+            <line number="2"  hits="12" branch="False" />
+            <line number="3"  hits="12" branch="False" />
+            <line number="4"  hits="12" branch="False" />
+            <line number="5"  hits="12" branch="False" />
+            <line number="6"  hits="0"  branch="False" />
+            <line number="7"  hits="0"  branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="8"  hits="0"  branch="False" />
+            <line number="9"  hits="0"  branch="False" />
+            <line number="10" hits="0"  branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
