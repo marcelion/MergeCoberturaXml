@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MergeCoberturaXml.CoberturaModel;
 using Microsoft.Extensions.Logging;
 
@@ -86,19 +87,19 @@ namespace MergeCoberturaXml.Merging
                 if (line.Conditions != null)
                 {
                     int count = 0;
-                    int sum = 0;
+                    float sum = 0;
                     foreach (var condition in line.Conditions.Condition)
                     {
-                        if (int.TryParse(condition.Coverage.Replace("%", ""), out int coverage))
+                        if (float.TryParse(condition.Coverage.Replace("%", ""), out float coverage))
                         {
                             count++;
                             sum += coverage;
                         }
                     }
 
-                    var conditionCoverage = sum / count;
+                    var conditionCoverage = count > 0 ? sum / count : 0;
 
-                    line.ConditionCoverage = $"{conditionCoverage}% ({sum / 50}/{count * 2})";
+                    line.ConditionCoverage = $"{conditionCoverage}% ({Math.Round(sum / 50f, 1)}/{count * 2})";
                 }
             }
         }
