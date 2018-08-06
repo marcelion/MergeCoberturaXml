@@ -1,4 +1,6 @@
-﻿using MergeCoberturaXml.Merging;
+﻿using System.Collections.Generic;
+using MergeCoberturaXml.CoberturaModel;
+using MergeCoberturaXml.Merging;
 using MergeCoberturaXml.Test.Infrastructure;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
@@ -110,6 +112,67 @@ namespace MergeCoberturaXml.Test.Merging
 
             Assert.Single(logger.Messages);
             Assert.Equal("Calculating the statistics of the merged report...", logger.Messages[0]);
+        }
+
+        [Fact]
+        public void ConditionCoverageTest()
+        {
+            var report = new CoverageReport
+            {
+                Packages = new Packages
+                {
+                    Package = new List<Package>
+                    {
+                        new Package
+                        {
+                            Classes = new Classes
+                            {
+                                Class = new List<Class>
+                                {
+                                    new Class
+                                    {
+                                        Methods = new Methods
+                                        {
+                                            Method = new List<Method>()
+                                        },
+                                        Lines = new Lines
+                                        {
+                                            Line = new List<Line>
+                                            {
+                                                new Line
+                                                {
+                                                    Number = 1,
+                                                    Hits = 0,
+                                                    Branch = "True",
+                                                    ConditionCoverage = "33% (1/3)",
+                                                    Conditions = new Conditions
+                                                    {
+                                                        Condition = new List<Condition>
+                                                        {
+                                                            new Condition
+                                                            {
+                                                                Number = "1",
+                                                                Coverage = "33.3%",
+                                                                Type = "jump"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            var logger = new MessageLogger<ReportCalculator>();
+            var reportCalculator = new ReportCalculator(logger);
+            reportCalculator.CalculateStatistics(report);
+            // TODO: Not correct, but no exception
+            Assert.Equal("33.3% (0.7/2)", report.Packages.Package[0].Classes.Class[0].Lines.Line[0].ConditionCoverage);
         }
     }
 }
