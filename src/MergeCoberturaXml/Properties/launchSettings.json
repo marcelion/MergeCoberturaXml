@@ -2,7 +2,7 @@
   "profiles": {
     "MergeCoberturaXml": {
       "commandName": "Project",
-      "commandLineArgs": ""
+      "commandLineArgs": "-i \"Franke.IoT.PackageRepositoryService.Database.Test.cobertura.xml;Franke.IoT.PackageRepositoryService.Test.cobertura.xml\" -o merged.xml"
     }
   }
 }
