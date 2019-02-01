@@ -217,23 +217,18 @@ namespace MergeCoberturaXml.Merging
         private bool MergeSources(CoverageReport mergedReport, ICollection<CoverageReport> reports)
         {
             var sharedSource = GetSharedSource(reports);
-            if (string.IsNullOrEmpty(sharedSource))
+            if (!string.IsNullOrEmpty(sharedSource))
             {
-                return false;
-            }
+                _logger.LogDebug($"Merging sources of reports to most common path '{sharedSource}'.");
 
-            _logger.LogDebug($"Merging sources of reports to most common path '{sharedSource}'.");
+                mergedReport.Sources = new Sources { Source = sharedSource };
 
-            mergedReport.Sources = new Sources
-            {
-                Source = sharedSource
-            };
-
-            foreach (var report in reports)
-            {
-                if (report.Sources.Source != sharedSource)
+                foreach (var report in reports)
                 {
-                    ChangeSource(report, sharedSource);
+                    if (report.Sources.Source != sharedSource)
+                    {
+                        ChangeSource(report, sharedSource);
+                    }
                 }
             }
 
@@ -246,18 +241,21 @@ namespace MergeCoberturaXml.Merging
 
             foreach (var report in reports)
             {
-                var directoryInfo = new DirectoryInfo(report.Sources.Source.TrimEnd(Path.DirectorySeparatorChar));
-                while(directoryInfo != null)
+                if (report.Sources?.Source != null)
                 {
-                    if (!sources.TryGetValue(directoryInfo.FullName, out var mappedReports))
+                    var directoryInfo = new DirectoryInfo(report.Sources.Source.TrimEnd(Path.DirectorySeparatorChar));
+                    while (directoryInfo != null)
                     {
-                        mappedReports = new List<CoverageReport>();
-                        sources.Add(directoryInfo.FullName, mappedReports);
+                        if (!sources.TryGetValue(directoryInfo.FullName, out var mappedReports))
+                        {
+                            mappedReports = new List<CoverageReport>();
+                            sources.Add(directoryInfo.FullName, mappedReports);
+                        }
+
+                        mappedReports.Add(report);
+
+                        directoryInfo = directoryInfo.Parent;
                     }
-
-                    mappedReports.Add(report);
-
-                    directoryInfo = directoryInfo.Parent;
                 }
             }
 
