@@ -241,7 +241,7 @@ namespace MergeCoberturaXml.Merging
 
             foreach (var report in reports)
             {
-                if (report.Sources?.Source != null)
+                if (!string.IsNullOrEmpty(report.Sources?.Source))
                 {
                     var directoryInfo = new DirectoryInfo(report.Sources.Source.TrimEnd(Path.DirectorySeparatorChar));
                     while (directoryInfo != null)
