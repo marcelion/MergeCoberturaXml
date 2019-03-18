@@ -7,13 +7,13 @@
 	<PackAsTool>true</PackAsTool>
     <PackageId>MergeCoberturaXml</PackageId>
     <AssemblyName>MergeCoberturaXml</AssemblyName>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>marcelion</Authors>
     <OutputType>Exe</OutputType>
     <StartupObject>MergeCoberturaXml.Program</StartupObject>
     <Description>This is a dotnet tool which merges multiple cobertura XML files into one single XML file.</Description>
     <PackageLicenseUrl>https://raw.githubusercontent.com/marcelion/MergeCoberturaXml/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright (c) 2018 marcelion</Copyright>
+    <Copyright>Copyright (c) 2019 marcelion</Copyright>
     <PackageProjectUrl>https://github.com/marcelion/MergeCoberturaXml</PackageProjectUrl>
     <RepositoryUrl>https://github.com/marcelion/MergeCoberturaXml</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
