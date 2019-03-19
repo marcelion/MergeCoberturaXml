@@ -211,88 +211,29 @@ namespace MergeCoberturaXml.Merging
 
         private bool MergeSources(CoverageReport mergedReport, ICollection<CoverageReport> reports)
         {
-            var sharedSource = GetSharedSource(reports);
-            if (!string.IsNullOrEmpty(sharedSource))
+            _logger.LogDebug("Making all file names absolute.");
+
+            foreach (var report in reports)
             {
-                _logger.LogDebug($"Merging sources of reports to most common path '{sharedSource}'.");
-
-                mergedReport.Sources = new Sources { Source = sharedSource };
-
-                foreach (var report in reports)
-                {
-                    if (report.Sources?.Source != sharedSource)
-                    {
-                        ChangeSource(report, sharedSource);
-                    }
-                }
+                MakePathsAbsolute(report);
             }
 
             return true;
         }
 
-        private string GetSharedSource(ICollection<CoverageReport> reports)
-        {
-            var sources = new Dictionary<string, ICollection<CoverageReport>>();
-
-            foreach (var report in reports)
-            {
-                if (!string.IsNullOrEmpty(report.Sources?.Source))
-                {
-                    var directoryInfo = new DirectoryInfo(report.Sources.Source.TrimEnd(Path.DirectorySeparatorChar));
-                    while (directoryInfo != null)
-                    {
-                        if (!sources.TryGetValue(directoryInfo.FullName, out var mappedReports))
-                        {
-                            mappedReports = new List<CoverageReport>();
-                            sources.Add(directoryInfo.FullName, mappedReports);
-                        }
-
-                        mappedReports.Add(report);
-
-                        directoryInfo = directoryInfo.Parent;
-                    }
-                }
-            }
-
-            var sharedSource = sources.Where(r => r.Value.Count == reports.Count).OrderByDescending(r => r.Key.Length).Select(p => p.Key).FirstOrDefault();
-            if (!string.IsNullOrEmpty(sharedSource))
-            {
-                return $"{sharedSource}{Path.DirectorySeparatorChar}";
-            }
-
-            _logger.LogError($"No common path in source paths was found! Source paths of reports: {string.Join(", ", reports.Select(r => r.Sources.Source))}");
-            return null;
-        }
-
-        private void ChangeSource(CoverageReport report, string newSource)
+        private void MakePathsAbsolute(CoverageReport report)
         {
             foreach (var package in report.Packages.Package)
             {
                 foreach (var cl in package.Classes.Class)
                 {
-                    if (cl.Filename.StartsWith(newSource))
+                    var source = report.Sources?.Source;
+                    if (!string.IsNullOrEmpty(source))
                     {
-                        cl.Filename = cl.Filename.Replace(newSource, "");
-                    }
-                    else
-                    {
-                        var oldSource = report.Sources?.Source;
-                        if (!string.IsNullOrEmpty(oldSource))
-                        {
-                            var diffSource = oldSource.Replace(newSource, "");
-
-                            cl.Filename = $"{diffSource}{cl.Filename}";
-                        }
+                        cl.Filename = Path.Combine(source, cl.Filename);
                     }
                 }
             }
-
-            if (report.Sources == null)
-            {
-                report.Sources = new Sources();
-            }
-
-            report.Sources.Source = newSource;
         }
 
         #endregion
