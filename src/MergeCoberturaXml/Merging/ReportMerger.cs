@@ -89,11 +89,6 @@ namespace MergeCoberturaXml.Merging
         {
             foreach (var cl in classes)
             {
-                if (cl.Name.Contains("Seed"))
-                {
-
-                }
-
                 var existingClass = existingPackage.Classes.Class.FirstOrDefault(c => c.Name == cl.Name && c.Filename == cl.Filename);
                 if (existingClass == null)
                 {
@@ -225,7 +220,7 @@ namespace MergeCoberturaXml.Merging
 
                 foreach (var report in reports)
                 {
-                    if (report.Sources.Source != sharedSource)
+                    if (report.Sources?.Source != sharedSource)
                     {
                         ChangeSource(report, sharedSource);
                     }
@@ -271,16 +266,33 @@ namespace MergeCoberturaXml.Merging
 
         private void ChangeSource(CoverageReport report, string newSource)
         {
-            var oldSource = report.Sources.Source;
-            var diffSource = oldSource.Replace(newSource, "");
-
             foreach (var package in report.Packages.Package)
             {
                 foreach (var cl in package.Classes.Class)
                 {
-                    cl.Filename = $"{diffSource}{cl.Filename}";
+                    if (cl.Filename.StartsWith(newSource))
+                    {
+                        cl.Filename = cl.Filename.Replace(newSource, "");
+                    }
+                    else
+                    {
+                        var oldSource = report.Sources?.Source;
+                        if (!string.IsNullOrEmpty(oldSource))
+                        {
+                            var diffSource = oldSource.Replace(newSource, "");
+
+                            cl.Filename = $"{diffSource}{cl.Filename}";
+                        }
+                    }
                 }
             }
+
+            if (report.Sources == null)
+            {
+                report.Sources = new Sources();
+            }
+
+            report.Sources.Source = newSource;
         }
 
         #endregion
