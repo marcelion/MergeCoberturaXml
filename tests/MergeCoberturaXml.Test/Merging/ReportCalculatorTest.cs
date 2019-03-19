@@ -35,7 +35,7 @@ namespace MergeCoberturaXml.Test.Merging
 
             var class0 = package.Classes.Class[0];
             Assert.Equal("DummyProject.Server.Controllers.DummyController (0)", class0.Name);
-            Assert.Equal(@"src\DummyProject.Server\Controllers\DummyController.cs", class0.Filename);
+            Assert.EndsWith(@"src\DummyProject.Server\Controllers\DummyController.cs", class0.Filename);
             Assert.Equal(1, class0.LineRate);
             Assert.Equal(1, class0.BranchRate);
             Assert.Equal(0, class0.Complexity);
@@ -89,7 +89,7 @@ namespace MergeCoberturaXml.Test.Merging
 
             var class1 = package.Classes.Class[1];
             Assert.Equal("DummyProject.Server.Controllers.DummyController (1)", class1.Name);
-            Assert.Equal(@"src\DummyProject.Server\Controllers\DummyControllerPartial.cs", class1.Filename);
+            Assert.EndsWith(@"src\DummyProject.Server\Controllers\DummyControllerPartial.cs", class1.Filename);
             Assert.Equal(1, class1.LineRate);
             Assert.Equal(1, class1.BranchRate);
             Assert.Single(class1.Methods.Method);

@@ -20,7 +20,7 @@ namespace MergeCoberturaXml.Test.Merging
             var mergedReport = reportMerger.Merge(reports);
 
             Assert.NotNull(mergedReport);
-            Assert.Equal(@"D:\dummy-project\", mergedReport.Sources.Source);
+            Assert.Null(mergedReport.Sources);
 
             Assert.Single(mergedReport.Packages.Package);
             var package = mergedReport.Packages.Package[0];
@@ -43,7 +43,7 @@ namespace MergeCoberturaXml.Test.Merging
 
             Assert.Equal(2, logger.Messages.Count);
             Assert.Equal("Merging reports...", logger.Messages[0]);
-            Assert.Equal("Merging sources of reports to most common path 'D:\\dummy-project\\'.", logger.Messages[1]);
+            Assert.Equal("Making all file names absolute.", logger.Messages[1]);
         }
     }
 }
