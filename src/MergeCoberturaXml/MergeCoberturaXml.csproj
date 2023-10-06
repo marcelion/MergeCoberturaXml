@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable>true</IsPackable>
 	<PackAsTool>true</PackAsTool>
     <PackageId>MergeCoberturaXml</PackageId>
     <AssemblyName>MergeCoberturaXml</AssemblyName>
-    <Version>1.1.0</Version>
-    <Authors>marcelion</Authors>
+    <Version>2.0.0</Version>
+    <Authors>marcelion,Loïc Morvan</Authors>
     <OutputType>Exe</OutputType>
     <StartupObject>MergeCoberturaXml.Program</StartupObject>
     <Description>This is a dotnet tool which merges multiple cobertura XML files into one single XML file.</Description>
